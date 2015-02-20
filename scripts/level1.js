@@ -3,7 +3,7 @@
 var Phaser = require( 'phaser' );
 
 function Level( game ) {
-    this.damping = 4;
+    this.damping = 2;
 }
 
 Level.prototype.init = function() {
@@ -13,8 +13,8 @@ Level.prototype.init = function() {
 
 Level.prototype.preload = function() {
     this.game.load.image( 'background', '/images/background_tile1.png' );
-    this.game.load.image( 'tile1', '/images/gray1.png' );
-    this.game.load.spritesheet( 'player', '/images/hero.png', 135, 135, 4 );
+    this.game.load.spritesheet( 'tile1', '/images/gray1.png', 128, 128 );
+    this.game.load.spritesheet( 'player', '/images/hero.png', 135, 135 );
 };
 
 Level.prototype.set = function( pointer ) {
@@ -30,6 +30,21 @@ Level.prototype.launch = function( pointer ) {
     this.player.body.velocity.y += -vectorY / this.damping;
 };
 
+Level.prototype.hitTile = function( player, tile ) {
+    var x = player.velocity.x,
+        y = player.velocity.y;
+    var velocity = Math.sqrt( x * x + y * y );
+
+    if (velocity > 200) {
+        tile.sprite.damage( velocity );
+        if (tile.sprite.health < 1000) {
+            return tile.sprite.animations.next( 1 );
+        } else if (tile.sprite.health < 0) {
+            tile.sprite.destroy();
+        }
+    }
+};
+
 Level.prototype.create = function() {
     var x,
         y;
@@ -40,10 +55,17 @@ Level.prototype.create = function() {
     this.game.physics.startSystem( Phaser.Physics.P2JS );
     this.game.physics.p2.restitution = 0.8;
     this.game.physics.p2.gravity.y = 100;
+    this.game.physics.p2.setImpactEvents( true );
 
     this.player = this.game.add.sprite( 300, 520, 'player' );
-    this.player.animations.add( 'idle' );
-    this.player.animations.play( 'idle', 12, true );
+    this.player.animations.add( 'idle', [0, 1, 2, 3] );
+    this.player.animations.add( 'spin-start', [4, 5] );
+    this.player.animations.add( 'spin', [8, 9, 10, 11] );
+    this.player.animations.add( 'spin-stop', [12, 13] );
+    this.player.animations.add( 'dig', [16, 17, 18, 19] );
+    this.player.animations.add( 'die', [20, 21, 22, 23] );
+
+    this.player.animations.play( 'idle', 4, true );
 
     this.game.physics.p2.enable( this.player, true );
     this.player.body.setRectangle( 60, 116, -10, 2 );
@@ -53,8 +75,11 @@ Level.prototype.create = function() {
         for (y = 0; y < 20; y += 1) {
             var tile;
             tile = this.game.add.sprite( x * 128, 3200 - y * 128, 'tile1' );
+            tile.animations.add( 'states' );
+            tile.health = 2000;
             this.game.physics.p2.enable( tile, true );
             tile.body.static = true;
+            this.player.body.createBodyCallback( tile, this.hitTile, this );
         }
     }
 
