@@ -4,8 +4,8 @@
   "description": "A game produced during the game-jam.at event.",
   "main": "index.html",
   "scripts": {
-    "watch": "watchify scripts/main.js -o game.bundle.js",
-    "build": "browserify scripts/main.js -o game.bundle.js && uglify -s game.bundle.js -o game.bundle.js"
+    "watch": "watchify scripts/main.js --noparse=./node_modules/phaser/dist/phaser.min.js -o game.bundle.js",
+    "build": "browserify scripts/main.js -o game.bundle.js && uglify -s ./game.bundle.js -o ./game.bundle.js"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
   },
   "browserify-shim": {
     "jquery": "$",
-    "phaser": "Phaser"
+    "phaser": "global:Phaser"
   },
   "browserify": {
     "transform": ["browserify-shim"]
