@@ -1,0 +1,28 @@
+{
+  "name": "jules",
+  "version": "0.0.1",
+  "description": "A game produced during the game-jam.at event.",
+  "main": "index.html",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eliias/jules.git"
+  },
+  "keywords": [
+    "Gamejam",
+    "Game",
+    "HTML5",
+    "JavaScript"
+  ],
+  "author": "Hannes Moser <hannes.moser@fh-salzburg.ac.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eliias/jules/issues"
+  },
+  "homepage": "https://github.com/eliias/jules",
+  "dependencies": {
+    "phaser": "^2.2.2"
+  }
+}
