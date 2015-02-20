@@ -4,7 +4,8 @@
   "description": "A game produced during the game-jam.at event.",
   "main": "index.html",
   "scripts": {
-    "test": "npm test"
+    "watch": "watchify scripts/main.js -o game.bundle.js",
+    "build": "browserify scripts/main.js -o game.bundle.js && uglify -s game.bundle.js -o game.bundle.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,21 @@
   },
   "homepage": "https://github.com/eliias/jules",
   "dependencies": {
+    "jquery": "^2.1.3",
     "phaser": "^2.2.2"
+  },
+  "devDependencies": {
+    "browserify": "^8.1.3",
+    "browserify-shim": "^3.8.2"
+  },
+  "browser": {
+    "phaser": "./node_modules/phaser/dist/phaser.min.js"
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "phaser": "Phaser"
+  },
+  "browserify": {
+    "transform": ["browserify-shim"]
   }
 }

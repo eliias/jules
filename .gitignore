@@ -3,3 +3,9 @@
 
 # Dependency directory
 node_modules
+
+# Node.js
+npm-debug.log
+
+# Game
+game.bundle.js
