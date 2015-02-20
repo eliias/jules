@@ -3,7 +3,7 @@
 var Phaser = require( 'phaser' );
 
 function Level( game ) {
-    this.damping = 2;
+    this.damping = 0.5;
 }
 
 Level.prototype.init = function() {
@@ -53,7 +53,7 @@ Level.prototype.create = function() {
     this.game.add.tileSprite( 0, 0, 2000, 3200, 'background' );
 
     this.game.physics.startSystem( Phaser.Physics.P2JS );
-    this.game.physics.p2.restitution = 0.8;
+    this.game.physics.p2.restitution = 0.3;
     this.game.physics.p2.gravity.y = 100;
     this.game.physics.p2.setImpactEvents( true );
 
