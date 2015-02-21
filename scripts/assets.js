@@ -70,7 +70,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      200,
         score:       40,
         animations:  {}
     },
@@ -80,7 +80,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      1200,
         score:       40,
         animations:  {}
     },
@@ -90,7 +90,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      600,
         score:       40,
         animations:  {}
     },
@@ -100,7 +100,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      200,
         score:       40,
         animations:  {}
     },
@@ -110,7 +110,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      1200,
         score:       40,
         animations:  {}
     },
@@ -120,7 +120,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      1200,
         score:       40,
         animations:  {}
     },
@@ -158,7 +158,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      600,
         score:       40,
         bounding:    {
             type:   'circle',
@@ -172,7 +172,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      600,
         score:       40,
         bounding:    {
             type:   'circle',
@@ -186,7 +186,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      600,
         score:       40,
         bounding:    {
             type:   'circle',
@@ -200,7 +200,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      600,
         score:       40,
         bounding:    {
             type:   'circle',
@@ -214,7 +214,7 @@ module.exports = {
         height:      128,
         destroyable: true,
         static:      true,
-        health:      400,
+        health:      200,
         score:       40,
         enemy:       true,
         bounding:    {
@@ -229,7 +229,7 @@ module.exports = {
         height:      128,
         destroyable: false,
         static:      true,
-        health:      400,
+        health:      900,
         score:       40,
         bounding:    {
             type:   'circle',
