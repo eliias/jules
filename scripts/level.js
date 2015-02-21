@@ -1,13 +1,14 @@
 'use strict';
 
-var _      = require( 'lodash' ),
-    Phaser = require( 'phaser' ),
-    assets = require( './assets' ),
-    asset  = require( './asset' ),
-    level  = require( './data/level1' );
+var _         = require( 'lodash' ),
+    Phaser    = require( 'phaser' ),
+    assets    = require( './assets' ),
+    asset     = require( './asset' ),
+    transform = require( './transform' ),
+    level     = transform( require( '../export/level_1' ) );
 
 function Level( game ) {
-    this.damping = 0.5;
+    this.damping = 0.2;
     this.boost = 15;
     this.health = 40;
     this.threshhold = 10;
@@ -49,14 +50,14 @@ Level.prototype.launch = function( pointer ) {
 
 Level.prototype.hit = function( player, tile ) {
     var x = player.velocity.x,
-        y = player.velocity.y > 0 ? player.velocity.y * this.boost : player.velocity.y / this.boost,
+        y = player.velocity.y,
         velocity;
     velocity = Math.sqrt( x * x + y * y );
 
     if (velocity > this.threshhold) {
         tile.sprite.damage( velocity );
         if (tile.sprite.health < this.health / 2) {
-            return tile.sprite.animations.next( 1 );
+            //return tile.sprite.animations.next( 1 );
         } else if (tile.sprite.health < 0) {
             tile.sprite.destroy();
         }
@@ -81,10 +82,9 @@ Level.prototype.update = function() {
         velocity = Math.sqrt( x * x + y * y );
 
     if (velocity > this.threshhold) {
-        this.player.animations.play( 'spin', 12, true );
+        this.player.animations.play( 'spin', 16, true );
     } else {
-        this.player.animations.stop();
-        this.player.animations.play( 'idle', 2, false );
+        this.player.animations.play( 'idle', 8, true );
     }
 };
 
@@ -107,7 +107,7 @@ Level.prototype.create = function() {
         asset( this.game, 'tile_border_top', x * assets.tile_border_top.width, 0 );
     }
     for (y = 0; y < Math.round( this.height / assets.tile_border_left.height ) + 1; y += 1) {
-        asset( this.game, 'tile_border_left', 0, y * assets.tile_border_left.height );
+        asset( this.game, 'tile_border_left', -1 * assets.tile_border_left.width, y * assets.tile_border_left.height );
     }
     for (x = -1; x < Math.round( this.width / assets.tile_border_bottom.width ) + 1; x += 1) {
         asset( this.game, 'tile_border_bottom', x * assets.tile_border_bottom.width, this.height );
@@ -117,7 +117,11 @@ Level.prototype.create = function() {
     }
 
     // Player
-    this.player = this.game.add.sprite( 300, 520, 'player' );
+    this.player = this.game.add.sprite(
+        level.gridWidth * level.start.x,
+        level.gridHeight * level.start.y,
+        'player'
+    );
     this.player.animations.add( 'idle', [0, 1, 2, 3] );
     this.player.animations.add( 'spin-start', [4, 5] );
     this.player.animations.add( 'spin', [8, 9, 10, 11] );
@@ -127,13 +131,13 @@ Level.prototype.create = function() {
 
     this.player.animations.play( 'idle', 4, true );
 
-    this.game.physics.p2.enable( this.player, true );
+    this.game.physics.p2.enable( this.player );
     this.player.body.setRectangle( 60, 116, -10, 2 );
     this.player.body.fixedRotation = true;
 
     // Level
     _.forEach( level.assets, function( a ) {
-        var tile = asset( self.game, a.sprite, a.x * 128, a.y * 128 );
+        var tile = asset( self.game, a.sprite, a.x * 128, a.y * 128, a.opts );
         self.player.body.createBodyCallback( tile, self.hit, self );
     } );
 
@@ -141,10 +145,6 @@ Level.prototype.create = function() {
 
     this.game.input.onDown.add( this.set, this );
     this.game.input.onUp.add( this.launch, this );
-};
-
-Level.prototype.render = function() {
-    this.game.debug.body( this.player );
 };
 
 module.exports = Level;

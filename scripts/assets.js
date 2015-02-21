@@ -1,24 +1,8 @@
 'use strict';
 
 module.exports = {
-    // Test
-    'tile1':              {
-        src:         '/images/gray1.png',
-        width:       128,
-        height:      128,
-        destroyable: true,
-        static:      true,
-        health:      40,
-        score:       0,
-        animations:  {
-            'states': {
-                frames: undefined
-            }
-        }
-    },
-
     // Border
-    'tile_border_bottom': {
+    'tile_border_bottom':    {
         src:         '/images/tile_border_bottom.png',
         width:       128,
         height:      128,
@@ -28,7 +12,7 @@ module.exports = {
         score:       Number.NEGATIVE_INFINITY,
         animations:  {}
     },
-    'tile_border_left':   {
+    'tile_border_left':      {
         src:         '/images/tile_border_left.png',
         width:       128,
         height:      128,
@@ -38,7 +22,7 @@ module.exports = {
         score:       Number.NEGATIVE_INFINITY,
         animations:  {}
     },
-    'tile_border_right':  {
+    'tile_border_right':     {
         src:         '/images/tile_border_right.png',
         width:       128,
         height:      128,
@@ -48,7 +32,7 @@ module.exports = {
         score:       Number.NEGATIVE_INFINITY,
         animations:  {}
     },
-    'tile_border_top':    {
+    'tile_border_top':       {
         src:         '/images/tile_border_top.png',
         width:       128,
         height:      128,
@@ -60,64 +44,196 @@ module.exports = {
     },
 
     // Tiles
-    'tile_crack_1':       {
+    'tile_crack_square_1':   {
         src:         '/images/tile_crack_01.png',
         width:       128,
         height:      128,
         destroyable: false,
         static:      true,
-        health:      40,
+        health:      1000,
         score:       40,
         animations:  {}
     },
-    'tile_dirt_1':        {
+    'tile_dirt_square_1':    {
         src:         '/images/tile_dirt_01.png',
         width:       128,
         height:      128,
         destroyable: false,
         static:      true,
-        health:      40,
+        health:      400,
         score:       40,
         animations:  {}
     },
-    'tile_gas_1':         {
+    'tile_gas_square_1':     {
         src:         '/images/tile_gas_01.png',
         width:       128,
         height:      128,
         destroyable: false,
         static:      true,
-        health:      40,
+        health:      400,
         score:       40,
         animations:  {}
     },
-    'tile_gem_1':         {
+    'tile_gem_square_1':     {
         src:         '/images/tile_gem_01.png',
         width:       128,
         height:      128,
         destroyable: false,
         static:      true,
-        health:      40,
+        health:      400,
         score:       40,
         animations:  {}
     },
-    'tile_stone_1':       {
+    'tile_stone_square_1':   {
         src:         '/images/tile_stone_01.png',
         width:       128,
         height:      128,
         destroyable: false,
         static:      true,
-        health:      40,
+        health:      400,
         score:       40,
         animations:  {}
     },
-    'tile_wood_1':        {
+    'tile_wood_square_1':    {
         src:         '/images/tile_wood_01.png',
         width:       128,
         height:      128,
         destroyable: false,
         static:      true,
-        health:      40,
+        health:      400,
         score:       40,
+        animations:  {}
+    },
+    'tile_mineral_square_1': {
+        src:         '/images/tile_mineral_128_1.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        animations:  {}
+    },
+    'tile_mineral_square_2': {
+        src:         '/images/tile_mineral_128_2.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        animations:  {}
+    },
+    'tile_dirt_round_1':     {
+        src:         '/images/tile_rundeErde_128_1.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
+        animations:  {}
+    },
+    'tile_dirt_round_2':     {
+        src:         '/images/tile_rundeErde_128_2.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
+        animations:  {}
+    },
+    'tile_stone_round_1':    {
+        src:         '/images/tile_runderStein_128_1.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
+        animations:  {}
+    },
+    'tile_stone_round_2':    {
+        src:         '/images/tile_runderStein_128_2.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
+        animations:  {}
+    },
+    'tile_stone_round_3':    {
+        src:         '/images/tile_runderStein_128_3.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
+        animations:  {}
+    },
+    'tile_stone_round_4':    {
+        src:         '/images/tile_runderStein_128_4.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
+        animations:  {}
+    },
+    'tile_gas_round_1':      {
+        src:         '/images/tile_rundesGas_128.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
+        animations:  {}
+    },
+    'tile_gold_round_1':     {
+        src:         '/images/tile_rundesGold.png',
+        width:       128,
+        height:      128,
+        destroyable: false,
+        static:      true,
+        health:      400,
+        score:       40,
+        bounding:    {
+            type:   'circle',
+            radius: 64
+        },
         animations:  {}
     }
 };

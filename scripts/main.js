@@ -13,4 +13,3 @@ game = new Phaser.Game(
 );
 
 game.state.add( 'level', Level, true );
-game.state.start( 'level' );
