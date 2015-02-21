@@ -53,8 +53,8 @@ Level.prototype.create = function() {
     this.game.add.tileSprite( 0, 0, 2000, 3200, 'background' );
 
     this.game.physics.startSystem( Phaser.Physics.P2JS );
-    this.game.physics.p2.restitution = 0.3;
-    this.game.physics.p2.gravity.y = 100;
+    this.game.physics.p2.restitution = 0.2;
+    this.game.physics.p2.gravity.y = 200;
     this.game.physics.p2.setImpactEvents( true );
 
     this.player = this.game.add.sprite( 300, 520, 'player' );
