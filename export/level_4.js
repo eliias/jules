@@ -216,11 +216,6 @@ module.exports = [
 },
 {
     sprite: 'tile_dirt_round_1',
-    x: -10,
-    y: 0
-},
-{
-    sprite: 'tile_dirt_round_1',
     x: -8,
     y: -2
 },
