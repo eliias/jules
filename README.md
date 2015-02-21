@@ -7,7 +7,6 @@ You need to have [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.com/)
 running.
 
 ```bash
-npm install -g watchify uglify
 npm install
 ```
 
