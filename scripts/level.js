@@ -45,7 +45,7 @@ Level.prototype.preload = function() {
 
     // Assets
     _.forEach( assets, function( asset, key ) {
-        self.game.load.spritesheet( key, asset.src, asset.x, asset.y );
+        self.game.load.spritesheet( key, asset.src, asset.width, asset.height );
     } );
 
     // Player
@@ -180,8 +180,8 @@ Level.prototype.create = function() {
     } );
 
     var style = {
-        font:  "25px sans-serif",
-        fill:  "#FFFFFF",
+        font:      "25px sans-serif",
+        fill:      "#FFFFFF",
         textAlign: "center"
     };
     this.time = this.game.add.text(
@@ -195,6 +195,10 @@ Level.prototype.create = function() {
     this.timer = 120;
     setInterval( function() {
         self.timer -= 1;
+
+        if (self.timer <= 0) {
+            window.location.reload();
+        }
     }, 1000 );
 
     this.score = this.game.add.text(
