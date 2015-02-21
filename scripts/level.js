@@ -1,6 +1,6 @@
 'use strict';
 
-var _         = require( 'lodash' ),
+var forEach   = require( 'lodash/collection/foreach' ),
     Phaser    = require( 'phaser' ),
     assets    = require( './assets' ),
     asset     = require( './asset' ),
@@ -28,7 +28,7 @@ function Level( game ) {
     this.height = 0;
     this.level = 0;
     var self = this;
-    _.forEach( this.levels, function( level ) {
+    forEach( this.levels, function( level ) {
         self.height += level.height * level.gridHeight;
     } );
 }
@@ -44,7 +44,7 @@ Level.prototype.preload = function() {
     this.background = this.game.load.image( 'background', '/images/background_tile1.png' );
 
     // Assets
-    _.forEach( assets, function( asset, key ) {
+    forEach( assets, function( asset, key ) {
         self.game.load.spritesheet( key, asset.src, asset.width, asset.height );
     } );
 
@@ -174,8 +174,8 @@ Level.prototype.create = function() {
 
     // Level
     var offset = 0;
-    _.forEach( this.levels, function( level ) {
-        _.forEach( level.assets, function( a ) {
+    forEach( this.levels, function( level ) {
+        forEach( level.assets, function( a ) {
             var tile = asset( self.game, a.sprite, a.x * 128, offset + (a.y + 1) * 128, a.opts );
             self.player.body.createBodyCallback( tile, self.hit, self );
         } );

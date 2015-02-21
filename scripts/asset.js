@@ -1,7 +1,7 @@
 'use strict';
 
-var _      = require( 'lodash' ),
-    assets = require( './assets' );
+var forEach = require( 'lodash/collection/foreach' ),
+    assets  = require( './assets' );
 
 /**
  *
@@ -26,7 +26,7 @@ function asset( game, name, x, y, opts ) {
     tile = game.add.sprite( x, y, name );
     tile.health = a.health;
 
-    _.forEach( a.animations, function( animation, key ) {
+    forEach( a.animations, function( animation, key ) {
         // TODO check if frames property is set
         tile.animations.add( key );
     } );
@@ -42,7 +42,7 @@ function asset( game, name, x, y, opts ) {
     tile.body.static = a.static;
 
     if (opts) {
-        _.forEach( opts, function( opt, key ) {
+        forEach( opts, function( opt, key ) {
             //tile.body[key] = opt;
         } );
     }
