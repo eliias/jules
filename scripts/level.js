@@ -13,12 +13,20 @@ var _         = require( 'lodash' ),
     level6    = transform( require( '../export/level_6' ) ),
     level7    = transform( require( '../export/level_7' ) );
 
+function shuffle( o ) {
+    for (var j, x, i = o.length; i; j = Math.floor( Math.random() * i ), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+}
+
 function Level( game ) {
     this.damping = 0.2;
     this.boost = 15;
     this.health = 40;
     this.threshhold = 10;
-    this.levels = [level1, level2, level3, level4, level5, level6, level7];
+    //this.levels = shuffle( [level1, level2, level3, level4, level5, level6,
+    // level7] ); this.levels = [level1, level2, level3, level4, level5,
+    // level6, level7];
+    this.levels = [level2];
     this.width = level1.width * level1.gridWidth;
     this.height = 0;
     var self = this;
@@ -162,7 +170,7 @@ Level.prototype.create = function() {
     _.forEach( this.levels, function( level ) {
         console.log( level );
         _.forEach( level.assets, function( a ) {
-            var tile = asset( self.game, a.sprite, a.x * 128, offset + a.y * 128, a.opts );
+            var tile = asset( self.game, a.sprite, a.x * 128, offset + (a.y + 1) * 128, a.opts );
             self.player.body.createBodyCallback( tile, self.hit, self );
         } );
         offset += level.height * level.gridHeight;
