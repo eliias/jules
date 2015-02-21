@@ -5,15 +5,32 @@ var forEach   = require( 'lodash/collection/foreach' ),
     assets    = require( './assets' ),
     asset     = require( './asset' ),
     transform = require( './transform' ),
-    level     = transform( require( '../export/level_1' ) );
+    level1    = transform( require( '../export/level_1' ) ),
+    level2    = transform( require( '../export/level_2' ) ),
+    level3    = transform( require( '../export/level_3' ) ),
+    level4    = transform( require( '../export/level_4' ) ),
+    level5    = transform( require( '../export/level_5' ) ),
+    level6    = transform( require( '../export/level_6' ) ),
+    level7    = transform( require( '../export/level_7' ) );
+
+function shuffle( o ) {
+    for (var j, x, i = o.length; i; j = Math.floor( Math.random() * i ), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+}
 
 function Level( game ) {
     this.damping = 0.2;
     this.boost = 15;
     this.health = 40;
     this.threshhold = 10;
-    this.width = level.width * level.gridWidth;
-    this.height = level.height * level.gridHeight;
+    this.levels = shuffle( [level1, level2, level3, level4, level5, level6, level7] );
+    this.width = level1.width * level1.gridWidth;
+    this.height = 0;
+    this.level = 0;
+    var self = this;
+    forEach( this.levels, function( level ) {
+        self.height += level.height * level.gridHeight;
+    } );
 }
 
 Level.prototype.init = function() {
@@ -24,11 +41,11 @@ Level.prototype.init = function() {
 Level.prototype.preload = function() {
     var self = this;
 
-    this.game.load.image( 'background', '/images/background_tile1.png' );
+    this.background = this.game.load.image( 'background', '/images/background_tile1.png' );
 
     // Assets
     forEach( assets, function( asset, key ) {
-        self.game.load.spritesheet( key, asset.src, asset.x, asset.y );
+        self.game.load.spritesheet( key, asset.src, asset.width, asset.height );
     } );
 
     // Player
@@ -86,6 +103,11 @@ Level.prototype.update = function() {
     } else {
         this.player.animations.play( 'idle', 8, true );
     }
+
+    this.level = Math.max( this.level, Math.round( this.player.position.y / 100 ) );
+
+    this.time.setText( 'Zeit: ' + this.timer );
+    this.score.setText( 'Score: ' + this.level );
 };
 
 Level.prototype.create = function() {
@@ -93,8 +115,19 @@ Level.prototype.create = function() {
         y,
         self = this;
 
-    this.game.world.setBounds( 0, 0, this.width, this.height );
-    this.game.add.tileSprite( 0, 0, this.width, this.height, 'background' );
+    this.game.world.setBounds(
+        0,
+        0,
+        this.width + level1.gridWidth,
+        this.height + level1.gridHeight
+    );
+    this.game.add.tileSprite(
+        0,
+        0,
+        this.width + level1.gridWidth,
+        this.height + level1.gridHeight,
+        'background'
+    );
 
     this.game.physics.startSystem( Phaser.Physics.P2JS );
     this.game.physics.p2.restitution = 0.2;
@@ -107,19 +140,19 @@ Level.prototype.create = function() {
         asset( this.game, 'tile_border_top', x * assets.tile_border_top.width, 0 );
     }
     for (y = 0; y < Math.round( this.height / assets.tile_border_left.height ) + 1; y += 1) {
-        asset( this.game, 'tile_border_left', -1 * assets.tile_border_left.width, y * assets.tile_border_left.height );
+        asset( this.game, 'tile_border_left', 0 * assets.tile_border_left.width, y * assets.tile_border_left.height );
     }
     for (x = -1; x < Math.round( this.width / assets.tile_border_bottom.width ) + 1; x += 1) {
-        asset( this.game, 'tile_border_bottom', x * assets.tile_border_bottom.width, this.height );
+        asset( this.game, 'tile_border_bottom', (x + 1) * assets.tile_border_bottom.width, this.height + assets.tile_border_bottom.height );
     }
     for (y = 0; y < Math.round( this.height / assets.tile_border_right.height ) + 1; y += 1) {
-        asset( this.game, 'tile_border_right', this.width, y * assets.tile_border_right.height );
+        asset( this.game, 'tile_border_right', this.width + assets.tile_border_right.width, y * assets.tile_border_right.height );
     }
 
     // Player
     this.player = this.game.add.sprite(
-        level.gridWidth * level.start.x,
-        level.gridHeight * level.start.y,
+        level1.gridWidth * level1.start.x,
+        level1.gridHeight * level1.start.y,
         'player'
     );
     this.player.animations.add( 'idle', [0, 1, 2, 3] );
@@ -134,12 +167,47 @@ Level.prototype.create = function() {
     this.game.physics.p2.enable( this.player );
     this.player.body.setRectangle( 60, 116, -10, 2 );
     this.player.body.fixedRotation = true;
-
+    console.log( this.height );
     // Level
-    forEach( level.assets, function( a ) {
-        var tile = asset( self.game, a.sprite, a.x * 128, a.y * 128, a.opts );
-        self.player.body.createBodyCallback( tile, self.hit, self );
+    var offset = 0;
+    forEach( this.levels, function( level ) {
+        console.log( level );
+        forEach( level.assets, function( a ) {
+            var tile = asset( self.game, a.sprite, a.x * 128, offset + (a.y + 1) * 128, a.opts );
+            self.player.body.createBodyCallback( tile, self.hit, self );
+        } );
+        offset += level.height * level.gridHeight;
     } );
+
+    var style = {
+        font:      "25px sans-serif",
+        fill:      "#FFFFFF",
+        textAlign: "center"
+    };
+    this.time = this.game.add.text(
+        this.game.width / 2,
+        30,
+        "Zeit: ",
+        style
+    );
+    this.time.anchor.setTo( 0, 0.5 );
+    this.time.fixedToCamera = true;
+    this.timer = 120;
+    setInterval( function() {
+        self.timer -= 1;
+
+        if (self.timer <= 0) {
+            window.location.reload();
+        }
+    }, 1000 );
+
+    this.score = this.game.add.text(
+        this.game.width / 2,
+        50,
+        "Score: " + this.level,
+        style
+    );
+    this.score.fixedToCamera = true;
 
     this.game.camera.follow( this.player );
 
