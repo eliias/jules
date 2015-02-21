@@ -23,12 +23,10 @@ function Level( game ) {
     this.boost = 15;
     this.health = 40;
     this.threshhold = 10;
-    //this.levels = shuffle( [level1, level2, level3, level4, level5, level6,
-    // level7] ); this.levels = [level1, level2, level3, level4, level5,
-    // level6, level7];
-    this.levels = [level2];
+    this.levels = shuffle( [level1, level2, level3, level4, level5, level6, level7] );
     this.width = level1.width * level1.gridWidth;
     this.height = 0;
+    this.level = 0;
     var self = this;
     _.forEach( this.levels, function( level ) {
         self.height += level.height * level.gridHeight;
@@ -105,6 +103,11 @@ Level.prototype.update = function() {
     } else {
         this.player.animations.play( 'idle', 8, true );
     }
+
+    this.level = Math.max( this.level, Math.round( this.player.position.y / 100 ) );
+
+    this.time.setText( 'Zeit: ' + this.timer );
+    this.score.setText( 'Score: ' + this.level );
 };
 
 Level.prototype.create = function() {
@@ -175,6 +178,32 @@ Level.prototype.create = function() {
         } );
         offset += level.height * level.gridHeight;
     } );
+
+    var style = {
+        font:  "25px sans-serif",
+        fill:  "#FFFFFF",
+        textAlign: "center"
+    };
+    this.time = this.game.add.text(
+        this.game.width / 2,
+        30,
+        "Zeit: ",
+        style
+    );
+    this.time.anchor.setTo( 0, 0.5 );
+    this.time.fixedToCamera = true;
+    this.timer = 120;
+    setInterval( function() {
+        self.timer -= 1;
+    }, 1000 );
+
+    this.score = this.game.add.text(
+        this.game.width / 2,
+        50,
+        "Score: " + this.level,
+        style
+    );
+    this.score.fixedToCamera = true;
 
     this.game.camera.follow( this.player );
 
