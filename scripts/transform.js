@@ -1,6 +1,7 @@
 'use strict';
 
-var _   = require( 'lodash' ),
+var clone   = require( 'lodash/lang/clone' ),
+    forEach = require( 'lodash/collection/foreach' ),
     tpl = {
         width:      11,
         height:     20,
@@ -13,9 +14,9 @@ var _   = require( 'lodash' ),
     };
 
 module.exports = function( data ) {
-    var level = _.clone( tpl );
+    var level = clone( tpl );
 
-    _.forEach( data, function( item ) {
+    forEach( data, function( item ) {
         item.x = Math.abs( item.x );
         item.y = Math.abs( item.y );
     } );

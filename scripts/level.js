@@ -1,6 +1,6 @@
 'use strict';
 
-var _         = require( 'lodash' ),
+var forEach   = require( 'lodash/collection/foreach' ),
     Phaser    = require( 'phaser' ),
     assets    = require( './assets' ),
     asset     = require( './asset' ),
@@ -27,7 +27,7 @@ Level.prototype.preload = function() {
     this.game.load.image( 'background', '/images/background_tile1.png' );
 
     // Assets
-    _.forEach( assets, function( asset, key ) {
+    forEach( assets, function( asset, key ) {
         self.game.load.spritesheet( key, asset.src, asset.x, asset.y );
     } );
 
@@ -136,7 +136,7 @@ Level.prototype.create = function() {
     this.player.body.fixedRotation = true;
 
     // Level
-    _.forEach( level.assets, function( a ) {
+    forEach( level.assets, function( a ) {
         var tile = asset( self.game, a.sprite, a.x * 128, a.y * 128, a.opts );
         self.player.body.createBodyCallback( tile, self.hit, self );
     } );
