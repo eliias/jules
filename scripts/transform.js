@@ -1,8 +1,8 @@
 'use strict';
 
 var clone   = require( 'lodash/lang/clone' ),
-    forEach = require( 'lodash/collection/foreach' ),
-    tpl = {
+    forEach = require( 'lodash/collection/forEach' ),
+    tpl     = {
         width:      11,
         height:     20,
         gridWidth:  128,
