@@ -24,7 +24,7 @@ Level.prototype.init = function() {
 Level.prototype.preload = function() {
     var self = this;
 
-    this.game.load.image( 'background', '/images/background_tile1.png' );
+    this.background = this.game.load.image( 'background', '/images/background_tile1.png' );
 
     // Assets
     _.forEach( assets, function( asset, key ) {
@@ -93,8 +93,19 @@ Level.prototype.create = function() {
         y,
         self = this;
 
-    this.game.world.setBounds( 0, 0, this.width, this.height );
-    this.game.add.tileSprite( 0, 0, this.width, this.height, 'background' );
+    this.game.world.setBounds(
+        0,
+        0,
+        this.width + level.gridWidth,
+        this.height + level.gridHeight
+    );
+    this.game.add.tileSprite(
+        0,
+        0,
+        this.width + level.gridWidth,
+        this.height + level.gridHeight,
+        'background'
+    );
 
     this.game.physics.startSystem( Phaser.Physics.P2JS );
     this.game.physics.p2.restitution = 0.2;
@@ -107,13 +118,13 @@ Level.prototype.create = function() {
         asset( this.game, 'tile_border_top', x * assets.tile_border_top.width, 0 );
     }
     for (y = 0; y < Math.round( this.height / assets.tile_border_left.height ) + 1; y += 1) {
-        asset( this.game, 'tile_border_left', -1 * assets.tile_border_left.width, y * assets.tile_border_left.height );
+        asset( this.game, 'tile_border_left', 0 * assets.tile_border_left.width, y * assets.tile_border_left.height );
     }
     for (x = -1; x < Math.round( this.width / assets.tile_border_bottom.width ) + 1; x += 1) {
-        asset( this.game, 'tile_border_bottom', x * assets.tile_border_bottom.width, this.height );
+        asset( this.game, 'tile_border_bottom', (x + 1) * assets.tile_border_bottom.width, this.height + assets.tile_border_bottom.height );
     }
     for (y = 0; y < Math.round( this.height / assets.tile_border_right.height ) + 1; y += 1) {
-        asset( this.game, 'tile_border_right', this.width, y * assets.tile_border_right.height );
+        asset( this.game, 'tile_border_right', this.width + assets.tile_border_right.width, y * assets.tile_border_right.height );
     }
 
     // Player

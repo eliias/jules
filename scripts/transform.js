@@ -16,7 +16,7 @@ module.exports = function( data ) {
     var level = _.clone( tpl );
 
     _.forEach( data, function( item ) {
-        item.x = Math.abs( item.x );
+        item.x = Math.abs( item.x ) + 1;
         item.y = Math.abs( item.y );
     } );
 
