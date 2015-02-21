@@ -20,7 +20,7 @@ function shuffle( o ) {
 
 function Level( game ) {
     this.damping = 0.2;
-    this.impact = 3;
+    this.impact = 1.5;
     this.boost = 15;
     this.threshhold = 10;
     this.levels = shuffle( [level1, level2, level3, level4, level5, level6, level7] );
