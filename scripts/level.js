@@ -20,8 +20,8 @@ function shuffle( o ) {
 
 function Level( game ) {
     this.damping = 0.2;
+    this.impact = 3;
     this.boost = 15;
-    this.health = 40;
     this.threshhold = 10;
     this.levels = shuffle( [level1, level2, level3, level4, level5, level6, level7] );
     this.width = level1.width * level1.gridWidth;
@@ -68,16 +68,20 @@ Level.prototype.launch = function( pointer ) {
 Level.prototype.hit = function( player, tile ) {
     var x = player.velocity.x,
         y = player.velocity.y,
+        asset,
         velocity;
-    velocity = Math.sqrt( x * x + y * y );
+    velocity = Math.sqrt( x * x + y * y ) / this.impact;
 
-    if (velocity > this.threshhold) {
-        tile.sprite.damage( velocity );
-        if (tile.sprite.health < this.health / 2) {
-            //return tile.sprite.animations.next( 1 );
-        } else if (tile.sprite.health < 0) {
-            tile.sprite.destroy();
-        }
+    tile.sprite.damage( velocity );
+    asset = assets[tile.sprite.key]
+    if (tile.sprite.health < asset.health / 4 * 3) {
+        return tile.sprite.animations.next( 1 );
+    } else if (tile.sprite.health < asset.health / 4 * 2) {
+        return tile.sprite.animations.next( 1 );
+    } else if (tile.sprite.health < asset.health / 4 * 1) {
+        return tile.sprite.animations.next( 1 );
+    } else if (tile.sprite.health < 0) {
+        tile.sprite.destroy();
     }
 };
 
@@ -167,11 +171,10 @@ Level.prototype.create = function() {
     this.game.physics.p2.enable( this.player );
     this.player.body.setRectangle( 60, 116, -10, 2 );
     this.player.body.fixedRotation = true;
-    console.log( this.height );
+
     // Level
     var offset = 0;
     _.forEach( this.levels, function( level ) {
-        console.log( level );
         _.forEach( level.assets, function( a ) {
             var tile = asset( self.game, a.sprite, a.x * 128, offset + (a.y + 1) * 128, a.opts );
             self.player.body.createBodyCallback( tile, self.hit, self );
