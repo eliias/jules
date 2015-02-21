@@ -1,8 +1,8 @@
 'use strict';
 
-var Phaser    = require( 'phaser' ),
+var Phaser = require( 'phaser' ),
     player = require( './player' ),
-    Level1    = require( './level1' ),
+    Level  = require( './level' ),
     game;
 
 game = new Phaser.Game(
@@ -12,5 +12,5 @@ game = new Phaser.Game(
     ''
 );
 
-game.state.add( 'level1', Level1, true );
-game.state.start( 'level1' );
+game.state.add( 'level', Level, true );
+game.state.start( 'level' );
