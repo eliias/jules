@@ -21,11 +21,6 @@ module.exports = [
 },
 {
     sprite: 'tile_stone_square_1',
-    x: -3,
-    y: 0
-},
-{
-    sprite: 'tile_stone_square_1',
     x: -4,
     y: -17
 },
@@ -161,11 +156,6 @@ module.exports = [
 },
 {
     sprite: 'tile_stone_square_1',
-    x: -9,
-    y: 0
-},
-{
-    sprite: 'tile_stone_square_1',
     x: -3,
     y: -18
 },
@@ -198,11 +188,6 @@ module.exports = [
     sprite: 'tile_stone_square_1',
     x: -3,
     y: -16
-},
-{
-    sprite: 'tile_stone_square_1',
-    x: -1,
-    y: 0
 },
 {
     sprite: 'tile_stone_square_1',
@@ -351,8 +336,8 @@ module.exports = [
 },
 {
     sprite: 'tile_stone_square_1',
-    x: -7,
-    y: 0
+    x: 5,
+    y: 1
 },
 {
     sprite: 'tile_stone_square_1',
@@ -556,11 +541,6 @@ module.exports = [
 },
 {
     sprite: 'tile_stone_square_1',
-    x: -5,
-    y: 0
-},
-{
-    sprite: 'tile_stone_square_1',
     x: -6,
     y: -7
 },
@@ -575,6 +555,26 @@ module.exports = [
     y: -3
 },
 {
+    sprite: 'tile_stone_round_1',
+    x: 5,
+    y: 0
+},
+{
+    sprite: 'tile_stone_round_2',
+    x: 5,
+    y: -1
+},
+{
+    sprite: 'tile_stone_round_3',
+    x: 5,
+    y: -2
+},
+{
+    sprite: 'tile_stone_round_4',
+    x: 5,
+    y: -3
+},
+{
     sprite: 'tile_dirt_square_1',
     x: -2,
     y: -6
@@ -591,11 +591,6 @@ module.exports = [
 },
 {
     sprite: 'tile_dirt_square_1',
-    x: -2,
-    y: 0
-},
-{
-    sprite: 'tile_dirt_square_1',
     x: -8,
     y: -18
 },
@@ -608,11 +603,6 @@ module.exports = [
     sprite: 'tile_dirt_square_1',
     x: -1,
     y: -19
-},
-{
-    sprite: 'tile_dirt_square_1',
-    x: -8,
-    y: 0
 },
 {
     sprite: 'tile_dirt_square_1',
@@ -688,11 +678,6 @@ module.exports = [
     sprite: 'tile_dirt_square_1',
     x: -7,
     y: -19
-},
-{
-    sprite: 'tile_dirt_square_1',
-    x: -10,
-    y: 0
 },
 {
     sprite: 'tile_dirt_square_1',
@@ -836,11 +821,6 @@ module.exports = [
 },
 {
     sprite: 'tile_dirt_square_1',
-    x: -4,
-    y: 0
-},
-{
-    sprite: 'tile_dirt_square_1',
     x: 0,
     y: -12
 },
@@ -971,11 +951,6 @@ module.exports = [
 },
 {
     sprite: 'tile_dirt_square_1',
-    x: -6,
-    y: 0
-},
-{
-    sprite: 'tile_dirt_square_1',
     x: -8,
     y: -16
 },
@@ -988,11 +963,6 @@ module.exports = [
     sprite: 'tile_dirt_square_1',
     x: -7,
     y: -13
-},
-{
-    sprite: 'tile_dirt_square_1',
-    x: 0,
-    y: 0
 },
 {
     sprite: 'tile_dirt_square_1',
@@ -1118,6 +1088,11 @@ module.exports = [
     sprite: 'tile_dirt_square_1',
     x: -6,
     y: -8
+},
+{
+    sprite: 'tile_dirt_square_1',
+    x: 4,
+    y: 1
 },
 {
     sprite: 'tile_dirt_square_1',
@@ -1158,6 +1133,36 @@ module.exports = [
     sprite: 'tile_dirt_round_1',
     x: 2,
     y: -2
+},
+{
+    sprite: 'tile_dirt_round_1',
+    x: 4,
+    y: 0
+},
+{
+    sprite: 'tile_dirt_round_2',
+    x: 4,
+    y: -1
+},
+{
+    sprite: 'tile_gas_round_1',
+    x: 7,
+    y: 0
+},
+{
+    sprite: 'tile_gold_round_1',
+    x: 8,
+    y: 0
+},
+{
+    sprite: 'tile_gem_round_1',
+    x: 3,
+    y: 0
+},
+{
+    sprite: 'tile_gem_round_2',
+    x: 3,
+    y: -1
 },
 
 ];
