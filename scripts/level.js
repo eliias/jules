@@ -134,9 +134,9 @@ Level.prototype.create = function() {
     );
 
     this.game.physics.startSystem( Phaser.Physics.P2JS );
-    this.game.physics.p2.restitution = 0.2;
+    this.game.physics.p2.restitution = 0.3;
     this.game.physics.p2.friction = 10;
-    this.game.physics.p2.gravity.y = 200;
+    this.game.physics.p2.gravity.y = 1000;
     this.game.physics.p2.setImpactEvents( true );
 
     // Border
