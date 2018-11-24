@@ -32,6 +32,7 @@
   },
   "scripts": {
     "build": "browserify scripts/main.js | uglifyjs > game.bundle.js",
+    "start": "serve",
     "watch": "watchify scripts/main.js -o game.bundle.js"
   }
 }
