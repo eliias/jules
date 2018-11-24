@@ -1,6 +1,6 @@
 'use strict';
 
-var forEach = require( 'lodash/collection/forEach' ),
+var forEach = require( 'lodash/forEach' ),
     assets  = require( './assets' );
 
 /**

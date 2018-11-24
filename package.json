@@ -3,17 +3,6 @@
   "description": "A game produced during the game-jam.at event.",
   "version": "0.0.1",
   "author": "Hannes Moser <hannes.moser@fh-salzburg.ac.at>",
-  "browser": {
-    "phaser": "./node_modules/phaser/dist/phaser.min.js"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browserify-shim": {
-    "phaser": "Phaser"
-  },
   "bugs": {
     "url": "https://github.com/eliias/jules/issues"
   },

@@ -1,6 +1,6 @@
 'use strict';
 
-var forEach   = require( 'lodash/collection/forEach' ),
+var forEach   = require( 'lodash/forEach' ),
     Phaser    = require( 'phaser' ),
     assets    = require( './assets' ),
     asset     = require( './asset' ),
