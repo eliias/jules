@@ -18,6 +18,6 @@ indent_size = 4
 quote_type = single
 
 # Matches the exact files either package.json or .travis.yml
-[{package.json,.travis.yml}]
+[{app.json,package.json,.travis.yml}]
 indent_style = space
 indent_size = 2
