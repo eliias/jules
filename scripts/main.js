@@ -1,15 +1,15 @@
 'use strict';
 
-var Phaser = require( 'phaser' ),
-    player = require( './player' ),
-    Level  = require( './level' ),
-    game;
+window.PIXI = require('phaser/build/custom/pixi')
+window.p2 = require('phaser/build/custom/p2')
+var Phaser = window.Phaser = require('phaser/build/custom/phaser-split')
 
-game = new Phaser.Game(
+var Level = require('./level');
+var game = new Phaser.Game(
     '100%',
     '100%',
     Phaser.AUTO,
     ''
 );
 
-game.state.add( 'level', Level, true );
+game.state.add('level', Level, true);
