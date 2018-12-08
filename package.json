@@ -9,8 +9,7 @@
   "dependencies": {
     "jquery": "^3.1.1",
     "lodash": "^4.17.2",
-    "phaser": "^2.2.2",
-    "serve": "^10.1.1"
+    "phaser": "^2.2.2"
   },
   "devDependencies": {
     "browserify": "^14.1.0",
@@ -33,7 +32,6 @@
   },
   "scripts": {
     "build": "browserify scripts/main.js | uglifyjs > game.bundle.js",
-    "start": "serve",
-    "watch": "watchify scripts/main.js -o game.bundle.js"
+    "start": "watchify scripts/main.js -o game.bundle.js"
   }
 }
